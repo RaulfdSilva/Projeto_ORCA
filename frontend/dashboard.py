@@ -1,15 +1,13 @@
 import streamlit as st
 import requests
 
-# Configuração da página
+
 st.set_page_config(page_title="Crypto AI", layout="wide")
 API_URL = "http://127.0.0.1:8000"
 
-# Inicializa o estado de login se não existir
 if 'logado' not in st.session_state:
     st.session_state.logado = False
 
-# --- INTERFACE DE LOGIN ---
 if not st.session_state.logado:
     st.title("🔐 Acesso ao Sistema")
     
@@ -23,7 +21,6 @@ if not st.session_state.logado:
             
             if submit:
                 try:
-                    # Enviando como Form Data para o FastAPI
                     res = requests.post(
                         f"{API_URL}/login", 
                         data={"username": user, "password": pw},
@@ -42,15 +39,32 @@ if not st.session_state.logado:
 
     with tab2:
         with st.form("form_registro"):
+            col1, col2 = st.columns(2)
+            nome = col1.text_input("Nome")
+            sobrenome = col2.text_input("Sobrenome")
+    
+            email = st.text_input("E-mail")
             new_user = st.text_input("Escolha um Usuário")
-            new_pw = st.text_input("Escolha uma Senha", type="password")
-            register_btn = st.form_submit_button("Cadastrar")
+            
+            col3, col4 = st.columns(2)
+            new_pw = col3.text_input("Senha", type="password")
+            confirm_pw = col4.text_input("Repita a Senha", type="password")
+            register_btn = st.form_submit_button("Criar Conta")
             
             if register_btn:
+
+                dados = {
+                    "nome": nome,
+                    "sobrenome": sobrenome,
+                    "email": email,
+                    "username": new_user,
+                    "password": new_pw,
+                    "password_confirm": confirm_pw 
+                }
                 try:
                     res = requests.post(
                         f"{API_URL}/cadastro", 
-                        data={"username": new_user, "password": new_pw},
+                        data=dados,
                         timeout=5
                     )
                     if res.status_code == 200:
@@ -60,7 +74,6 @@ if not st.session_state.logado:
                 except Exception as e:
                     st.error(f"Erro ao conectar: {e}")
 
-# --- TELA PRINCIPAL (PÓS-LOGIN) ---
 else:
     st.sidebar.write(f"Conectado como: **{st.session_state.username}**")
     if st.sidebar.button("Sair"):

@@ -1,0 +1,13 @@
+# Banco de dados (Segurança)
+*.db
+usuarios.db
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# VS Code e Sistema
+.vscode/
+.DS_Store

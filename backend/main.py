@@ -3,15 +3,16 @@ import pandas as pd
 from binance.client import Client
 from sklearn.linear_model import LinearRegression
 import numpy as np
-import auth  # Importa nosso script de autenticação
+import auth 
+import random
 
 app = FastAPI(title="Crypto AI Predictor API")
 
-# Inicializa banco e cliente Binance
 auth.init_db()
 client = Client()
 
-# --- LÓGICA DE IA ---
+# --- FUNÇÕES AUXILIARES ---
+
 def get_historical_data(symbol: str):
     klines = client.get_historical_klines(symbol.upper(), "1m", "2 hours")
     df = pd.DataFrame(klines, columns=[
@@ -31,22 +32,39 @@ def train_and_predict(df):
 # --- ROTAS DE AUTENTICAÇÃO ---
 
 @app.post("/cadastro")
-def register(username: str = Form(...), password: str = Form(...)):
-    # Adicionamos uma trava para não aceitar dados vazios
-    if not username or not password:
-        raise HTTPException(status_code=400, detail="Dados inválidos")
-        
-    sucesso = auth.cadastrar_usuario(username, password)
+def register(
+    nome: str = Form(...), 
+    sobrenome: str = Form(...),
+    email: str = Form(...),
+    username: str = Form(...), 
+    password: str = Form(...),
+    password_confirm: str = Form(...)  
+):
+    # Note que agora o 'if' está alinhado dentro da função
+    if password != password_confirm:
+        raise HTTPException(status_code=400, detail="As senhas não coincidem")
+
+    if "@" not in email:
+        raise HTTPException(status_code=400, detail="E-mail inválido")
+
+    codigo = str(random.randint(100000, 999999))
+    
+    sucesso = auth.cadastrar_usuario_completo(nome, sobrenome, email, username, password, codigo)
+    
     if sucesso:
-        return {"message": f"Usuário {username} criado!"}
-    raise HTTPException(status_code=400, detail="Usuário já existe")
+        print(f"DEBUG: Código para {email} é {codigo}") 
+        return {"message": "Usuário pré-cadastrado! Verifique seu e-mail."}
+    
+    raise HTTPException(status_code=400, detail="Usuário ou E-mail já existem")
 
 @app.post("/login")
 def login(username: str = Form(...), password: str = Form(...)):
     if auth.verificar_usuario(username, password):
         return {"status": "Login aprovado", "user": username}
     raise HTTPException(status_code=401, detail="Credenciais inválidas")
+
 # --- ROTAS DE DADOS ---
+
 @app.get("/previsao/{symbol}")
 def predict_price(symbol: str):
     try:
