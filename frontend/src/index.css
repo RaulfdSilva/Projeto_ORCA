@@ -1,0 +1,62 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0e11;
+  color: #eaecef;
+  font-family: 'Inter', -apple-system, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#root {
+  width: 100%;
+}
+
+.orca-card {
+  background-color: #1e2329;
+  padding: 32px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 380px;
+  margin: auto;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.orca-input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  background-color: #2b3139;
+  border: 1px solid #474d57;
+  border-radius: 8px;
+  color: white;
+  box-sizing: border-box;
+}
+
+.orca-input:focus {
+  border-color: #f0b90b;
+  outline: none;
+}
+
+.orca-button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 16px;
+  background-color: #f0b90b;
+  color: #1e2329;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.orca-link {
+  color: #f0b90b;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  display: block;
+}
