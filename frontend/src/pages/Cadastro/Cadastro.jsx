@@ -71,14 +71,24 @@ function Cadastro() {
                 </form>
             ) : (
                 <form onSubmit={handleVerificar}>
-                    <p style={{ textAlign: 'center', color: '#b7bdc6' }}>Digite o código enviado para {formData.email}</p>
+                    <p style={{ textAlign: 'center', color: '#b7bdc6' }}>
+                        Digite o código enviado para <br/>
+                        <strong style={{ color: '#f0b90b' }}>{formData.email}</strong>
+                    </p>
+                    
                     <input 
                         className="orca-input"
                         type="text" 
                         placeholder="000000" 
                         maxLength="6"
+                        value={codigoVerificacao} 
                         onChange={(e) => setCodigoVerificacao(e.target.value)} 
-                        style={{ fontSize: '24px', textAlign: 'center', letterSpacing: '8px' }}
+                        style={{ 
+                            fontSize: '24px', 
+                            textAlign: 'center', 
+                            letterSpacing: '8px',
+                            marginTop: '10px' 
+                        }}
                         required 
                     />
                     <button className="orca-button" type="submit">Ativar Conta</button>

@@ -17,9 +17,18 @@ function Login() {
 
     try {
       const response = await api.post('/login', formData);
-      setMensagem(`Sucesso!`);
+      
+        localStorage.setItem('user', response.data.user);
+        setMensagem("Acesso concedido!");
+        setTimeout(() => {
+            navigate('/dashboard');
+        }, 1000);
     } catch (error) {
-      setMensagem('Erro: Credenciais inválidas ou conta não ativada');
+        if (error.response && error.response.status === 403) {
+            setMensagem("Sua conta ainda não foi ativada. Verifique seu e-mail.");
+        } else {
+            setMensagem("Usuário ou senha incorretos.");
+        }
     }
   };
 

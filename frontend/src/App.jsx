@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import Cadastro from './pages/Cadastro/Cadastro';
-
+import Dashboard from './pages/Dashboard/Dashboard';
 function App() {
   return (
     <Router>
@@ -16,6 +16,7 @@ function App() {
         
         {/* Rota de segurança para qualquer link errado (opcional) */}
         <Route path="*" element={<h2>Página não encontrada (404)</h2>} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

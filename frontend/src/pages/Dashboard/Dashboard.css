@@ -1,0 +1,109 @@
+/* Dashboard.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+.dashboard-container {
+    background-color: #0b0e11;
+    height: 100vh;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    color: #ffffff;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(22, 26, 30, 0.8);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 12px;
+}
+
+.user-name { color: #f0b90b; font-weight: bold; }
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+    background: #2ebd85;
+    box-shadow: 0 0 8px #2ebd85;
+}
+
+/* SEÇÃO DE 3 COLUNAS */
+.allocation-section {
+    display: flex;
+    gap: 12px;
+    height: 440px;
+    margin-bottom: 12px;
+}
+
+.card-base {
+    background: rgba(22, 26, 30, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-card { flex: 0 0 280px; }
+.main-card { flex: 1; }
+
+/* FEED DE NOTÍCIAS (NLP) */
+.news-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+.news-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    border-left: 3px solid #848e9c;
+}
+
+.sent-bullish { border-color: #2ebd85; background: rgba(46, 189, 133, 0.05); }
+.sent-bearish { border-color: #f6465d; background: rgba(246, 70, 93, 0.05); }
+
+.sentiment-tag {
+    font-size: 9px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 2px 5px;
+    border-radius: 4px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+/* GRÁFICO E SELECT */
+.orca-select-container { background: #1e2329; border: 1px solid #f0b90b; border-radius: 6px; }
+.orca-input-select { background: transparent; border: none; color: #fff; padding: 4px; outline: none; font-size: 12px; }
+
+/* RODAPÉ E LOGS */
+.ai-monitor-card { height: 110px; margin-top: auto; }
+
+.system-logs {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 6px;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #00f2ff;
+    height: 50px;
+    overflow-y: hidden;
+}
+
+.progress-bar-bg { width: 100%; height: 8px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; margin-top: 10px; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, #bc00ff, #00f2ff); box-shadow: 0 0 10px rgba(0, 242, 255, 0.4); }
